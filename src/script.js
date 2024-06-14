@@ -110,13 +110,7 @@ function onParticleClick(event) {
         }
       }
 
-      const particleIndex = closestIntersect.index;
-      const color = new THREE.Color(r, g, b);
       const colors = particles.geometry.attributes.color;
-
-      colors.array[particleIndex * 3    ] = color.r;
-      colors.array[particleIndex * 3 + 1] = color.g;
-      colors.array[particleIndex * 3 + 2] = color.b;
 
       colors.needsUpdate = true;
     }
