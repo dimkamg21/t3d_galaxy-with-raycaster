@@ -14,6 +14,8 @@ let raycaster, intersects;
 
 const threshold = 0.02;
 
+let mouseDownTime = 0;
+
 const parameters = {
   count: 1000,
   size: 0.05,
@@ -44,9 +46,11 @@ function init() {
   camera.position.z = 6
   scene.add(camera)
 
-  // Controls
-  controls = new OrbitControls(camera, canvas)
-  controls.enableDamping = true
+   // Controls
+   controls = new OrbitControls(camera, canvas)
+   controls.enableDamping = true
+
+ 
 
   generateGalaxy();
 
@@ -63,7 +67,9 @@ function init() {
   //
 
   window.addEventListener( 'resize', onWindowResize );
-  window.addEventListener( 'click', (event) => onParticleClick(event));
+
+  window.addEventListener('mousedown', onMouseDown);
+  window.addEventListener('mouseup', onMouseUp);
 }
 
 function animate() {
@@ -72,6 +78,18 @@ function animate() {
 
   // Update controls
   controls.update()
+}
+
+function onMouseDown(event) {
+  mouseDownTime = Date.now();
+}
+
+function onMouseUp(event) {
+  const clickDuration = Date.now() - mouseDownTime;
+
+  if (clickDuration < 100) {
+    onParticleClick(event);
+  }
 }
 
 function onParticleClick(event) {
