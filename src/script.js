@@ -12,7 +12,7 @@ const pointer = new THREE.Vector2();
 
 let raycaster, intersects;
 
-const threshold = 0.02;
+const threshold = 0.03;
 
 let mouseDownTime = 0;
 
@@ -80,14 +80,14 @@ function animate() {
   controls.update()
 }
 
-function onMouseDown(event) {
+function onMouseDown() {
   mouseDownTime = Date.now();
 }
 
 function onMouseUp(event) {
   const clickDuration = Date.now() - mouseDownTime;
 
-  if (clickDuration < 100) {
+  if (clickDuration < 200) {
     onParticleClick(event);
   }
 }
